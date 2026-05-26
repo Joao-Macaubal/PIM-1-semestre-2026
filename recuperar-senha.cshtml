@@ -1,0 +1,124 @@
+﻿@page "/recuperar-senha"
+@model asc.Pages.RecuperarSenhaModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Acesso - ESC</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-header">
+            <svg class="logo-icon" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="#6b8266" stroke-width="2" stroke-linecap="round">
+                    <line x1="60" y1="35" x2="60" y2="5" />
+                    <line x1="60" y1="35" x2="40" y2="12" />
+                    <line x1="60" y1="35" x2="80" y2="12" />
+                    <line x1="60" y1="35" x2="22" y2="25" />
+                    <line x1="60" y1="35" x2="98" y2="25" />
+                    <line x1="60" y1="35" x2="12" y2="45" />
+                    <line x1="60" y1="35" x2="108" y2="45" />
+                </g>
+                <line x1="5" y1="50" x2="40" y2="50" stroke="#6b8266" stroke-width="2" stroke-linecap="round" />
+                <line x1="80" y1="50" x2="115" y2="50" stroke="#6b8266" stroke-width="2" stroke-linecap="round" />
+                <circle cx="60" cy="50" r="14" fill="#ffffff" stroke="#6b8266" stroke-width="2" />
+                <circle cx="60" cy="50" r="11" fill="none" stroke="#6b8266" stroke-width="1" />
+                <text x="60" y="53" font-family="'Montserrat', sans-serif" font-size="8" font-weight="700" fill="#6b8266" text-anchor="middle">ESC</text>
+            </svg>
+            <h1>RECUPERAR ACESSO</h1>
+            @if (!Model.DadosVerificados)
+            {
+                <p>Confirme seus dados para validar sua identidade.</p>
+            }
+            else
+            {
+                <p>Identidade confirmada! Crie sua nova senha abaixo.</p>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.MensagemErro))
+        {
+            <div style="background-color: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: 'Montserrat', sans-serif; text-align: center; margin-bottom: 15px;">
+                ⚠️ @Model.MensagemErro
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.MensagemSucesso))
+        {
+            <div style="background-color: #dcfce7; color: #16a34a; border: 1px solid #86efac; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: 'Montserrat', sans-serif; text-align: center; margin-bottom: 15px;">
+                ✅ @Model.MensagemSucesso
+            </div>
+            <script>
+                        setTimeout(function () {
+                            window.location.href = "/";
+                        }, 3000);
+            </script>
+        }
+
+        <form class="login-form" method="post" id="form-recuperar">
+
+            @if (!Model.DadosVerificados)
+            {
+                // HTML DA ETAPA 1: SOLICITA DADOS DE VALIDAÇÃO
+                <div class="form-group">
+                    <label for="documento">CPF ou CNPJ Cadastrado:</label>
+                    <input type="text" id="documento" asp-for="Documento" placeholder="Digite seu CPF/CNPJ" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone Cadastrado (com DDD):</label>
+                    <input type="text" id="telefone" asp-for="Telefone" placeholder="Ex: 11999999999" required>
+                </div>
+
+                <button type="submit" name="acao" value="verificar" class="btn-submit">VERIFICAR DADOS</button>
+            }
+            else
+            {
+                // HTML DA ETAPA 2: EXIBE APENAS APÓS VALIDAR NO MYSQL
+                <input type="hidden" asp-for="Documento" />
+                <input type="hidden" asp-for="Telefone" />
+
+                <div class="form-group">
+                    <label for="nova-senha">Nova Senha:</label>
+                    <input type="password" id="nova-senha" asp-for="NovaSenha" placeholder="Mínimo 8 caracteres" minlength="8" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar-senha">Confirme a Nova Senha:</label>
+                    <input type="password" id="confirmar-senha" placeholder="Repita a nova senha" minlength="8" required>
+                </div>
+
+                <button type="submit" name="acao" value="salvar" class="btn-submit">ALTERAR SENHA</button>
+            }
+        </form>
+
+        <hr class="divider">
+
+        <div class="login-footer">
+            <a href="/" class="register-link">VOLTAR PARA O LOGIN</a>
+        </div>
+    </div>
+
+    <script>
+            const form = document.getElementById('form-recuperar');
+            const novaSenha = document.getElementById('nova-senha');
+            const confirmarSenha = document.getElementById('confirmar-senha');
+
+            form.addEventListener('submit', function (event) {
+                // Só executa a validação de senhas se os campos existirem na tela (Etapa 2)
+                if (novaSenha && confirmarSenha) {
+                    if (novaSenha.value !== confirmarSenha.value) {
+                        event.preventDefault();
+                        alert('As senhas digitadas não conferem. Verifique e tente novamente.');
+                        confirmarSenha.focus();
+                    }
+                }
+            });
+    </script>
+</body>
+</html>

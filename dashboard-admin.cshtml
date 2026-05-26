@@ -1,0 +1,338 @@
+﻿@page
+@model asc.Pages.DashboardAdminModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - ESC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-admin.css">
+</head>
+<body>
+
+    <div class="d-flex min-vh-100 position-relative">
+
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+        <aside class="sidebar d-flex flex-column justify-content-between p-3 text-white" id="sidebar">
+            <div>
+                <div class="sidebar-brand d-flex align-items-center gap-2 pb-4 pt-2">
+                    <svg class="logo-icon" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: auto;">
+                        <g stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+                            <line x1="60" y1="35" x2="60" y2="5" />
+                            <line x1="60" y1="35" x2="40" y2="12" />
+                            <line x1="60" y1="35" x2="80" y2="12" />
+                            <line x1="60" y1="35" x2="22" y2="25" />
+                            <line x1="60" y1="35" x2="98" y2="25" />
+                            <line x1="60" y1="35" x2="12" y2="45" />
+                            <line x1="60" y1="35" x2="108" y2="45" />
+                        </g>
+                        <line x1="5" y1="50" x2="40" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <line x1="80" y1="50" x2="115" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="14" fill="#2d4536" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="11" fill="none" stroke="#ffffff" stroke-width="1" />
+                    </svg>
+                    <h2 class="m-0 fw-bold text-uppercase" style="font-size: 14px; letter-spacing: 1px;">Painel ESC</h2>
+                </div>
+
+                <nav class="sidebar-nav d-flex flex-column gap-2 mt-4">
+                    <a href="/dashboard-admin" class="nav-link active d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>📊</span> Dashboard
+                    </a>
+                    <a href="/projetos-admin" class="nav-link d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>🛠️</span> Projetos Ativos
+                    </a>
+                    <a href="/clientes-admin" class="nav-link d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>👥</span> Clientes
+                    </a>
+                </nav>
+            </div>
+
+            <div class="pb-2">
+                <a href="/Logout" class="btn btn-danger w-100 fw-bold py-2 rounded-3">🚪 Sair</a>
+            </div>
+        </aside>
+
+        <main class="admin-content d-flex flex-column flex-grow-1 vh-100 overflow-hidden">
+
+            <header class="admin-header bg-white px-5 py-3 d-flex justify-content-between align-items-center">
+                <button class="sidebar-toggle" onclick="abrirSidebar()" aria-label="Abrir menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="header-title">
+                    <h1 class="m-0 fs-5 fw-bold text-dark">Gestão de Solicitações</h1>
+                    <p class="m-0 text-muted small mt-1">Monitore os pedidos de orçamentos e andamento do sistema</p>
+                </div>
+
+                <div class="header-right d-flex align-items-center gap-4">
+                    <div class="search-bar-container position-relative">
+                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 text-muted small">🔍</span>
+                        <input type="text" class="form-control rounded-pill bg-light border-light ps-5 py-2" style="width: 240px; font-size: 13px;" placeholder="Buscar no sistema...">
+                    </div>
+                    <div class="profile-avatar rounded-circle d-flex align-items-center justify-content-center fw-bold" title="Administrador Logado">
+                        AD
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-page-body p-5 flex-grow-1 overflow-auto">
+
+                <section class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-light shadow-sm p-4 rounded-4 d-flex flex-row justify-content-between align-items-center bg-white">
+                            <div>
+                                <h3 class="m-0 text-muted text-uppercase fw-semibold tracking-wider" style="font-size: 12px;">Novas</h3>
+                                <p class="m-0 fs-2 fw-bold text-dark mt-2">@Model.TotalNovas</p>
+                            </div>
+                            <div class="metric-icon-box bg-warning-subtle text-warning fs-4 rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">⚡</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-light shadow-sm p-4 rounded-4 d-flex flex-row justify-content-between align-items-center bg-white">
+                            <div>
+                                <h3 class="m-0 text-muted text-uppercase fw-semibold tracking-wider" style="font-size: 12px;">Em Análise</h3>
+                                <p class="m-0 fs-2 fw-bold text-dark mt-2">@Model.TotalEmAnalise</p>
+                            </div>
+                            <div class="metric-icon-box bg-info-subtle text-info fs-4 rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">🔍</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-light shadow-sm p-4 rounded-4 d-flex flex-row justify-content-between align-items-center bg-white">
+                            <div>
+                                <h3 class="m-0 text-muted text-uppercase fw-semibold tracking-wider" style="font-size: 12px;">Propostas</h3>
+                                <p class="m-0 fs-2 fw-bold text-dark mt-2">@Model.TotalPropostas</p>
+                            </div>
+                            <div class="metric-icon-box bg-success-subtle text-success fs-4 rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">📋</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card border-light shadow-sm p-4 rounded-4 mb-4 bg-white">
+                    <form method="get" class="row g-3 align-items-end">
+                        <div class="col-md-5">
+                            <label for="filtro-cidade" class="form-label fw-semibold text-secondary small mb-2">Filtrar por Cidade:</label>
+                            <input type="text" id="filtro-cidade" asp-for="FiltroCidade" class="form-control rounded-3" placeholder="Ex: São José do Rio Preto">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="filtro-imovel" class="form-label fw-semibold text-secondary small mb-2">Tipo do Imóvel:</label>
+                            <select id="filtro-imovel" asp-for="FiltroTipoImovel" class="form-select rounded-3">
+                                <option value="">Todos os imóveis</option>
+                                <option value="Residencial">Residencial</option>
+                                <option value="Comercial">Comercial</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Rural">Rural</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-dark w-100 fw-semibold py-2 rounded-3">FILTRAR</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="card border-light shadow-sm rounded-4 overflow-hidden bg-white">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Cliente (CPF/CNPJ)</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Tipo Imóvel</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Cidade</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Área Disponível</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Status</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ListaSolicitacoes != null && Model.ListaSolicitacoes.Count > 0)
+                                {
+                                    @foreach (var solicitacao in Model.ListaSolicitacoes)
+                                    {
+                                        string badgeClass = "bg-warning-subtle text-warning";
+                                        string textoStatus = "Novo";
+
+                                        if (solicitacao.Projeto != null)
+                                        {
+                                            textoStatus = solicitacao.Projeto.StatusExecucao;
+                                            badgeClass = textoStatus == "Finalizado" ? "bg-success-subtle text-success" : "bg-info-subtle text-info";
+                                        }
+
+                                        <tr>
+                                            <td class="px-4 py-3 fw-semibold text-dark">@solicitacao.ClienteDocumento</td>
+                                            <td class="px-4 py-3 text-muted">@solicitacao.TipoImovel</td>
+                                            <td class="px-4 py-3 text-muted">@solicitacao.Cidade</td>
+                                            <td class="px-4 py-3 text-muted">@solicitacao.AreaDisponivel m²</td>
+                                            <td class="px-4 py-3">
+                                                <span class="badge rounded-pill @badgeClass px-3 py-2 fw-bold text-uppercase" style="font-size: 11px;">
+                                                    @textoStatus
+                                                </span>
+                                            </td>
+                                            <td class="px-4 py-3">
+                                                <button class="btn btn-outline-success btn-sm fw-semibold px-3 rounded-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalDetalhes"
+                                                        data-id="@solicitacao.Id"
+                                                        data-cliente="@solicitacao.ClienteDocumento"
+                                                        data-tipo="@solicitacao.TipoImovel"
+                                                        data-cidade="@solicitacao.Cidade"
+                                                        data-endereco="@solicitacao.Endereco"
+                                                        data-area="@solicitacao.AreaDisponivel"
+                                                        data-consumo="@solicitacao.ConsumoMedioMensal"
+                                                        data-data="@solicitacao.CriadoEm.ToString("dd/MM/yyyy às HH:mm")"
+                                                        data-status-slug="@(solicitacao.Projeto != null ? "projeto-ativo" : "novo")">
+                                                    Detalhes
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4 text-muted small">
+                                            ⚠️ Nenhuma solicitação técnica localizada para os critérios informados.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="modal fade" id="modalDetalhes" tabindex="-1" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <form method="post" asp-page-handler="ConverterParaProjeto" class="modal-content border-0 shadow rounded-4">
+
+                <input type="hidden" id="modal-imovel-id" name="imovelId" />
+
+                <div class="modal-header bg-light border-bottom-0 py-3 px-4 rounded-top-4">
+                    <h5 class="modal-title fw-bold text-dark fs-5" id="modalDetalhesLabel">📋 Detalhes da Solicitação</h5>
+                    <button type="button" class="btn-close" data-bs-shadow="none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-3">Dados da Solicitação</h6>
+                            <div class="bg-light p-3 rounded-3 d-flex flex-column gap-2" style="font-size: 14px;">
+                                <div><strong class="text-dark">Cliente (CPF/CNPJ):</strong> <span class="text-muted" id="md-cliente">...</span></div>
+                                <div><strong class="text-dark">Tipo do Imóvel:</strong> <span class="text-muted" id="md-tipo">...</span></div>
+                                <div><strong class="text-dark">Cidade:</strong> <span class="text-muted" id="md-cidade">...</span></div>
+                                <div><strong class="text-dark">Endereço:</strong> <span class="text-muted" id="md-endereco">...</span></div>
+                                <div><strong class="text-dark">Área Disponível:</strong> <span class="text-muted" id="md-area">...</span></div>
+                                <div><strong class="text-dark">Consumo Médio (R$):</strong> <span class="text-muted" id="md-consumo">...</span></div>
+                                <div><strong class="text-dark">Criado em:</strong> <span class="text-muted" id="md-data">...</span></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-3">Alterar Status do Pedido</h6>
+                            <div class="mb-3">
+                                <label for="statusSelect" class="form-label small fw-semibold text-muted">Novo Status (Fluxo RN07):</label>
+                                <select class="form-select rounded-3" id="statusSelect" onchange="verificarStatusProjeto()">
+                                    <option value="novo">Novo (Pendente de Proposta)</option>
+                                    <option value="aprovado">Aprovado (Liberar para Projeto/Obra)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-2">Observações Internas (Histórico)</h6>
+                            <div class="mb-3">
+                                <textarea class="form-control rounded-3 text-muted small" rows="3" placeholder="Insira notas técnicas sobre o dimensionamento fotovoltaico ou viabilidade estrutural do telhado..."></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer border-top-0 bg-light py-3 px-4 rounded-bottom-4 d-flex justify-content-between">
+                    <button type="submit" id="btnConverterProjeto" class="btn btn-success fw-semibold px-4 py-2 rounded-3 text-uppercase d-flex align-items-center gap-2" disabled>
+                        <span>🛠️</span> Converter em Projeto
+                    </button>
+
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-secondary fw-semibold px-4 py-2 rounded-3 text-dark bg-transparent border-0" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-dark fw-semibold px-4 py-2 rounded-3" onclick="salvarAlteracoes()">Salvar Alterações</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function abrirSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function fecharSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('modalDetalhes');
+        if (modal) {
+        modal.addEventListener('show.bs.modal', function (event) {
+        const botao = event.relatedTarget;
+
+        // Captura e exibe os dados técnicos
+        document.getElementById('modalDetalhesLabel').textContent = `📋 Detalhes da Solicitação #10${botao.getAttribute('data-id')}`;
+        document.getElementById('md-cliente').textContent = botao.getAttribute('data-cliente');
+        document.getElementById('md-tipo').textContent = botao.getAttribute('data-tipo');
+        document.getElementById('md-cidade').textContent = botao.getAttribute('data-cidade');
+        document.getElementById('md-endereco').textContent = botao.getAttribute('data-endereco');
+        document.getElementById('md-area').textContent = `${botao.getAttribute('data-area')} m²`;
+        document.getElementById('md-consumo').textContent = `R$ ${botao.getAttribute('data-consumo')}`; // 👈 CORRIGIDO AQUI )
+        document.getElementById('md-data').textContent = botao.getAttribute('data-data');
+        document.getElementById('modal-imovel-id').value = botao.getAttribute('data-id');
+
+        // Gerencia o fluxo do botão do projeto baseado se já existe projeto ou não
+        const slug = botao.getAttribute('data-status-slug');
+        const select = document.getElementById('statusSelect');
+        const btn = document.getElementById('btnConverterProjeto');
+
+        if(slug === 'projeto-ativo') {
+        select.value = 'aprovado';
+        select.setAttribute('disabled', 'true');
+        btn.setAttribute('disabled', 'true');
+        btn.innerHTML = '<span>✅</span> Projeto Já Criado';
+        } else {
+        select.value = 'novo';
+        select.removeAttribute('disabled');
+        btn.innerHTML = '<span>🛠️</span> Converter em Projeto';
+        btn.setAttribute('disabled', 'true');
+        }
+        });
+        }
+        });
+
+        function verificarStatusProjeto() {
+        const status = document.getElementById('statusSelect').value;
+        const btnProjeto = document.getElementById('btnConverterProjeto');
+        if (status === 'aprovado') {
+        btnProjeto.removeAttribute('disabled');
+        } else {
+        btnProjeto.setAttribute('disabled', 'true');
+        }
+        }
+
+        function salvarAlteracoes() {
+        alert('Alterações salvas com sucesso no histórico interno.');
+        }
+
+        function converterEmProjeto() {
+        alert('Enviando requisição de conversão...');
+        }
+    </script>
+</body>
+</html>

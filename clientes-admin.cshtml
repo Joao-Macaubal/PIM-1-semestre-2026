@@ -1,0 +1,247 @@
+﻿@page
+@model asc.Pages.ClientesAdminModel
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Clientes - ESC Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-admin.css">
+</head>
+<body>
+
+    <div class="d-flex min-vh-100 position-relative">
+
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+        <aside class="sidebar d-flex flex-column justify-content-between p-3 text-white" id="sidebar">
+            <div>
+                <div class="sidebar-brand d-flex align-items-center gap-2 pb-4 pt-2">
+                    <svg class="logo-icon" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: auto;">
+                        <g stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+                            <line x1="60" y1="35" x2="60" y2="5" />
+                            <line x1="60" y1="35" x2="40" y2="12" />
+                            <line x1="60" y1="35" x2="80" y2="12" />
+                            <line x1="60" y1="35" x2="22" y2="25" />
+                            <line x1="60" y1="35" x2="98" y2="25" />
+                            <line x1="60" y1="35" x2="12" y2="45" />
+                            <line x1="60" y1="35" x2="108" y2="45" />
+                        </g>
+                        <line x1="5" y1="50" x2="40" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <line x1="80" y1="50" x2="115" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="14" fill="#2d4536" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="11" fill="none" stroke="#ffffff" stroke-width="1" />
+                    </svg>
+                    <h2 class="m-0 fw-bold text-uppercase" style="font-size: 14px; letter-spacing: 1px;">Painel ESC</h2>
+                </div>
+
+                <nav class="sidebar-nav d-flex flex-column gap-2 mt-4">
+                    <a href="dashboard-admin" class="nav-link d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>📊</span> Dashboard
+                    </a>
+                    <a href="projetos-admin" class="nav-link d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>🛠️</span> Projetos Ativos
+                    </a>
+                    <a href="clientes-admin" class="nav-link active d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>👥</span> Clientes
+                    </a>
+                </nav>
+            </div>
+
+            <div class="pb-2">
+                <a href="/" class="btn btn-danger w-100 fw-bold py-2 rounded-3">🚪 Sair</a>
+            </div>
+        </aside>
+
+        <main class="admin-content d-flex flex-column flex-grow-1 vh-100 overflow-hidden">
+
+            <header class="admin-header bg-white px-5 py-3 d-flex justify-content-between align-items-center">
+                <button class="sidebar-toggle" onclick="abrirSidebar()" aria-label="Abrir menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="header-title">
+                    <h1 class="m-0 fs-5 fw-bold text-dark">Base de Clientes</h1>
+                    <p class="m-0 text-muted small mt-1">Gerencie os dados cadastrais e o histórico de consumidores do sistema</p>
+                </div>
+
+                <div class="header-right d-flex align-items-center gap-4">
+                    <div class="search-bar-container position-relative">
+                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 text-muted small">🔍</span>
+                        <input type="text" class="form-control rounded-pill bg-light border-light ps-5 py-2" style="width: 240px; font-size: 13px;" placeholder="Buscar por nome ou CPF/CNPJ...">
+                    </div>
+                    <div class="profile-avatar rounded-circle d-flex align-items-center justify-content-center fw-bold" title="Administrador Logado">
+                        AD
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-page-body p-5 flex-grow-1 overflow-auto">
+
+                <section class="card border-light shadow-sm rounded-4 overflow-hidden bg-white">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Nome / Razão Social</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Identificador (CPF/CNPJ)</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Telefone</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ListaClientes != null && Model.ListaClientes.Count > 0)
+                                {
+                                    @foreach (var cliente in Model.ListaClientes)
+                                    {
+                                        <tr>
+                                            <td class="px-4 py-3 fw-bold text-dark">@cliente.Nome</td>
+                                            <td class="px-4 py-3 text-muted">@cliente.Documento</td>
+                                            <td class="px-4 py-3 text-muted">@cliente.Telefone</td>
+                                            <td class="px-4 py-3">
+                                                @{
+                                                    var imovelComProjeto = cliente.Imoveis?.FirstOrDefault(i => i.Projeto != null)
+                                                                           ?? cliente.Imoveis?.FirstOrDefault();
+                                                    var projetoAtivo = imovelComProjeto?.Projeto;
+
+                                                    string codigoProjeto = projetoAtivo != null ? $"#PRJ-{projetoAtivo.Id:D4}" : "SEM CONTRATO";
+                                                    string statusProjeto = projetoAtivo != null ? projetoAtivo.StatusExecucao : "Nenhum sistema solar em fase de análise ou instalação.";
+                                                    string iconeStatus = projetoAtivo != null ? "☀️" : "💤";
+
+                                                    // Pegando os dados de endereço diretamente da tabela de Imoveis original
+                                                    string logradouroReal = imovelComProjeto != null ? imovelComProjeto.Endereco : "Não informado";
+                                                    string cidadeReal = imovelComProjeto != null ? imovelComProjeto.Cidade : "Não informado";
+                                                }
+
+                                                <button class="btn btn-outline-success btn-sm fw-semibold px-3 rounded-2 btn-ver-cadastro"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalVisualizarCliente"
+                                                        data-nome="@cliente.Nome"
+                                                        data-documento="@cliente.Documento"
+                                                        data-telefone="@cliente.Telefone"
+                                                        data-logradouro="@logradouroReal"
+                                                        data-cidadeuf="@cidadeReal"
+                                                        data-prj-codigo="@codigoProjeto"
+                                                        data-prj-status="@statusProjeto"
+                                                        data-prj-icone="@iconeStatus">
+                                                    Ver Cadastro
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center py-4 text-muted small">
+                                            ⚠️ Nenhum cliente cadastrado no MySQL ainda.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="modal fade" id="modalVisualizarCliente" tabindex="-1" aria-labelledby="modalVisualizarClienteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow rounded-4">
+
+                <div class="modal-header bg-light border-bottom-0 py-3 px-4 rounded-top-4">
+                    <h5 class="modal-title fw-bold text-dark fs-5" id="modalVisualizarClienteLabel">👥 Perfil Informativo do Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-shadow="none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-3">Informações de Contato</h6>
+                            <div class="bg-light p-3 rounded-3 d-flex flex-column gap-2" style="font-size: 14px;">
+                                <div><strong class="text-dark">Nome/Razão:</strong> <span class="text-muted" id="modal-cliente-nome">A carregar...</span></div>
+                                <div><strong class="text-dark">Documento:</strong> <span class="text-muted" id="modal-cliente-documento">A carregar...</span></div>
+                                <div><strong class="text-dark">Telefone:</strong> <span class="text-muted" id="modal-cliente-telefone">A carregar...</span></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-3">Endereço de Faturamento</h6>
+                            <div class="bg-light p-3 rounded-3 d-flex flex-column gap-2" style="font-size: 14px;">
+                                <div><strong class="text-dark">Logradouro:</strong> <span class="text-muted" id="modal-cliente-logradouro">A carregar...</span></div>
+                                <div><strong class="text-dark">Bairro:</strong> <span class="text-muted" id="modal-cliente-bairro">A carregar...</span></div>
+                                <div><strong class="text-dark">Cidade/UF:</strong> <span class="text-muted" id="modal-cliente-cidade-uf">A carregar...</span></div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-2">Histórico com a ESC Energia Solar</h6>
+                            <div class="p-3 border border-dashed rounded-3 bg-white d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="fs-3" id="modal-prj-icone">☀️</span>
+                                    <div>
+                                        <div class="fw-semibold text-dark" style="font-size: 14px;">Status do Projeto</div>
+                                        <div class="text-muted small" id="modal-prj-status">Carregando histórico...</div>
+                                    </div>
+                                </div>
+                                <span class="badge bg-success-subtle text-success rounded-pill fw-bold px-3 py-2 text-uppercase" style="font-size: 11px;" id="modal-prj-codigo">#PRJ-0000</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer border-top-0 bg-light py-3 px-4 rounded-bottom-4">
+                    <button type="button" class="btn btn-dark fw-semibold px-4 py-2 rounded-3" data-bs-dismiss="modal">Fechar Registro</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const modalVisualizar = document.getElementById('modalVisualizarCliente');
+
+        if (modalVisualizar) {
+        modalVisualizar.addEventListener('show.bs.modal', function (event) {
+        const botao = event.relatedTarget;
+
+        // 1. Dados Básicos
+        document.getElementById('modal-cliente-nome').textContent = botao.getAttribute('data-nome');
+        document.getElementById('modal-cliente-documento').textContent = botao.getAttribute('data-documento');
+        document.getElementById('modal-cliente-telefone').textContent = botao.getAttribute('data-telefone');
+
+        // 2. Dados de Endereço
+        document.getElementById('modal-cliente-logradouro').textContent = botao.getAttribute('data-logradouro');
+        document.getElementById('modal-cliente-bairro').textContent = botao.getAttribute('data-bairro');
+        document.getElementById('modal-cliente-cidade-uf').textContent = `${botao.getAttribute('data-cidade')} - ${botao.getAttribute('data-estado')}`;
+        
+
+        // 3. Dados do Histórico (Projetos do MySQL)
+        document.getElementById('modal-prj-icone').textContent = botao.getAttribute('data-prj-icone');
+        document.getElementById('modal-prj-status').textContent = botao.getAttribute('data-prj-status');
+        document.getElementById('modal-prj-codigo').textContent = botao.getAttribute('data-prj-codigo');
+        });
+        }
+        });
+    </script>
+    <script>
+        function abrirSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function fecharSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>

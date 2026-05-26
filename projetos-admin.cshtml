@@ -1,0 +1,298 @@
+﻿@page
+@model asc.Pages.projetos_adminModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos Ativos - ESC Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-admin.css">
+</head>
+<body>
+
+    <div class="d-flex min-vh-100 position-relative">
+
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+        <aside class="sidebar d-flex flex-column justify-content-between p-3 text-white" id="sidebar">
+            <div>
+                <div class="sidebar-brand d-flex align-items-center gap-2 pb-4 pt-2">
+                    <svg class="logo-icon" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: auto;">
+                        <g stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+                            <line x1="60" y1="35" x2="60" y2="5" />
+                            <line x1="60" y1="35" x2="40" y2="12" />
+                            <line x1="60" y1="35" x2="80" y2="12" />
+                            <line x1="60" y1="35" x2="22" y2="25" />
+                            <line x1="60" y1="35" x2="98" y2="25" />
+                            <line x1="60" y1="35" x2="12" y2="45" />
+                            <line x1="60" y1="35" x2="108" y2="45" />
+                        </g>
+                        <line x1="5" y1="50" x2="40" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <line x1="80" y1="50" x2="115" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="14" fill="#2d4536" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="11" fill="none" stroke="#ffffff" stroke-width="1" />
+                    </svg>
+                    <h2 class="m-0 fw-bold text-uppercase" style="font-size: 14px; letter-spacing: 1px;">Painel ESC</h2>
+                </div>
+
+                <nav class="sidebar-nav d-flex flex-column gap-2 mt-4">
+                    <a href="/dashboard-admin" class="nav-link d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>📊</span> Dashboard
+                    </a>
+                    <a href="/projetos-admin" class="nav-link active d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>🛠️</span> Projetos Ativos
+                    </a>
+                    <a href="/clientes-admin" class="nav-link d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold">
+                        <span>👥</span> Clientes
+                    </a>
+                </nav>
+            </div>
+
+            <div class="pb-2">
+                <a href="/Logout" class="btn btn-danger w-100 fw-bold py-2 rounded-3">🚪 Sair</a>
+            </div>
+        </aside>
+
+        <main class="admin-content d-flex flex-column flex-grow-1 vh-100 overflow-hidden">
+
+            <header class="admin-header bg-white px-5 py-3 d-flex justify-content-between align-items-center">
+                <button class="sidebar-toggle" onclick="abrirSidebar()" aria-label="Abrir menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="header-title">
+                    <h1 class="m-0 fs-5 fw-bold text-dark">Execução de Projetos</h1>
+                    <p class="m-0 text-muted small mt-1">Acompanhe as ordens de serviço e instalações em andamento pelo técnico</p>
+                </div>
+
+                <div class="header-right d-flex align-items-center gap-4">
+                    <div class="search-bar-container position-relative">
+                        <span class="position-absolute start-0 top-50 translate-middle-y ms-3 text-muted small">🔍</span>
+                        <input type="text" class="form-control rounded-pill bg-light border-light ps-5 py-2" style="width: 240px; font-size: 13px;" placeholder="Buscar código ou cliente...">
+                    </div>
+                    <div class="profile-avatar rounded-circle d-flex align-items-center justify-content-center fw-bold" title="Administrador Logado">
+                        AD
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-page-body p-5 flex-grow-1 overflow-auto">
+
+                <section class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-light shadow-sm p-4 rounded-4 d-flex flex-row justify-content-between align-items-center bg-white">
+                            <div>
+                                <h3 class="m-0 text-muted text-uppercase fw-semibold tracking-wider" style="font-size: 12px;">Em Instalação</h3>
+                                <p class="m-0 fs-2 fw-bold text-dark mt-2">@Model.TotalInstalacao.ToString("D2")</p>
+                            </div>
+                            <div class="metric-icon-box bg-warning-subtle text-warning fs-4 rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">🏗️</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-light shadow-sm p-4 rounded-4 d-flex flex-row justify-content-between align-items-center bg-white">
+                            <div>
+                                <h3 class="m-0 text-muted text-uppercase fw-semibold tracking-wider" style="font-size: 12px;">Pendente Concessionária</h3>
+                                <p class="m-0 fs-2 fw-bold text-dark mt-2">@Model.TotalConcessionaria.ToString("D2")</p>
+                            </div>
+                            <div class="metric-icon-box bg-info-subtle text-info fs-4 rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">⚡</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-light shadow-sm p-4 rounded-4 d-flex flex-row justify-content-between align-items-center bg-white">
+                            <div>
+                                <h3 class="m-0 text-muted text-uppercase fw-semibold tracking-wider" style="font-size: 12px;">Finalizados</h3>
+                                <p class="m-0 fs-2 fw-bold text-dark mt-2">@Model.TotalFinalizados.ToString("D2")</p>
+                            </div>
+                            <div class="metric-icon-box bg-success-subtle text-success fs-4 rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">✅</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card border-light shadow-sm rounded-4 overflow-hidden bg-white">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Cód. Projeto</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Cliente (CPF/CNPJ)</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Cidade</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Tipo Imóvel</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Status Execução</th>
+                                    <th class="px-4 py-3 text-secondary fw-semibold small">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ListaProjetos != null && Model.ListaProjetos.Count > 0)
+                                {
+                                    @foreach (var projeto in Model.ListaProjetos)
+                                    {
+                                        string statusReal = projeto.StatusExecucao ?? "";
+                                        string textoExibicao = "Aguardando Materiais";
+                                        string badgeClass = "bg-purple-subtle text-purple";
+
+                                        // 🛡️ Validação robusta: Aceita o texto do ENUM ou o índice numérico vindo do MySQL
+                                        if (statusReal.Contains("Materiais") || statusReal == "1")
+                                        {
+                                            textoExibicao = "Aguardando Materiais";
+                                            badgeClass = "bg-purple-subtle text-purple";
+                                        }
+                                        else if (statusReal.Contains("Instala") || statusReal.Contains("InstalaÃ§Ã£o") || statusReal == "2")
+                                        {
+                                            textoExibicao = "Em Instalação";
+                                            badgeClass = "bg-warning-subtle text-warning";
+                                        }
+                                        else if (statusReal.Contains("Concessionaria") || statusReal.Contains("ConcessionÃ¡ria") || statusReal.Contains("Concessionária") || statusReal.Contains("CONCESSIONÁ;RIA") || statusReal == "3")
+                                        {
+                                            textoExibicao = "Pendente Concessionária";
+                                            badgeClass = "bg-info-subtle text-info";
+                                        }
+                                        else if (statusReal.Contains("Finalizado") || statusReal == "4")
+                                        {
+                                            textoExibicao = "Finalizado";
+                                            badgeClass = "bg-success-subtle text-success";
+                                        }
+                                        else if (!string.IsNullOrWhiteSpace(statusReal))
+                                        {
+                                            // Caso venha qualquer outro texto inesperado do banco, mantém o valor original para não ficar em branco
+                                            textoExibicao = statusReal;
+                                            badgeClass = "bg-secondary-subtle text-secondary";
+                                        }
+
+                                        <tr>
+                                            <td class="px-4 py-3 fw-bold text-dark">#PRJ-@projeto.Id.ToString("D4")</td>
+                                            <td class="px-4 py-3 text-muted">@(projeto.Imovel?.ClienteDocumento ?? "Sem Vínculo")</td>
+                                            <td class="px-4 py-3 text-muted">@(projeto.Imovel?.Cidade ?? "-")</td>
+                                            <td class="px-4 py-3 text-muted">@(projeto.Imovel?.TipoImovel ?? "-")</td>
+                                            <td class="px-4 py-3">
+                                                <span class="badge rounded-pill @badgeClass px-3 py-2 fw-bold text-uppercase" style="font-size: 11px;">
+                                                    @textoExibicao
+                                                </span>
+                                            </td>
+                                            <td class="px-4 py-3">
+                                                <button class="btn btn-outline-success btn-sm fw-semibold px-3 rounded-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalGerenciarProjeto"
+                                                        data-id="@projeto.Id"
+                                                        data-tecnico="@projeto.ResponsavelTecnico"
+                                                        data-area="@(projeto.Imovel?.AreaDisponivel.ToString() ?? "0")"
+                                                        data-cidade="@(projeto.Imovel?.Cidade ?? "-")"
+                                                        data-data="@projeto.AtualizadoEm.ToString("dd/MM/yyyy")"
+                                                        data-status="@textoExibicao"
+                                                        data-diario="@projeto.DiarioBordo">
+                                                    Gerenciar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4 text-muted small">
+                                            ⚙️ Nenhum projeto solar fotovoltaico em phase de instalação física ativa.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="modal fade" id="modalGerenciarProjeto" tabindex="-1" aria-labelledby="modalGerenciarProjetoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <form method="post" asp-page="/projetos-admin" asp-page-handler="AtualizarOrdem" class="modal-content border-0 shadow rounded-4">
+
+                <input type="hidden" id="input-projeto-id" name="ProjetoId" />
+
+                <div class="modal-header bg-light border-bottom-0 py-3 px-4 rounded-top-4">
+                    <h5 class="modal-title fw-bold text-dark fs-5" id="modalGerenciarProjetoLabel">🛠️ Ordem de Serviço</h5>
+                    <button type="button" class="btn-close" data-bs-shadow="none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-3">Informações do Serviço</h6>
+                            <div class="bg-light p-3 rounded-3 d-flex flex-column gap-2" style="font-size: 14px;">
+                                <div><strong class="text-dark">Técnico Responsável:</strong> <span class="text-muted" id="txt-tecnico">...</span></div>
+                                <div><strong class="text-dark">Área Útil do Telhado:</strong> <span class="text-muted" id="txt-area">...</span></div>
+                                <div><strong class="text-dark">Local de Instalação:</strong> <span class="text-muted" id="txt-local">...</span></div>
+                                <div><strong class="text-dark">Última Atualização:</strong> <span class="text-muted" id="txt-data">...</span></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-3">Atualizar Progresso Técnico</h6>
+                            <div class="mb-3">
+                                <label for="faseSelect" class="form-label small fw-semibold text-muted">Status Atual do Serviço:</label>
+                                <select class="form-select rounded-3" id="faseSelect" name="NovoStatus" required>
+                                    <option value="Aguardando Materiais">Aguardando Materiais</option>
+                                    <option value="Em Instalação">Em Instalação (Montagem física)</option>
+                                    <option value="Pendente Concessionária">Pendente Concessionária (Vistoria/Relógio)</option>
+                                    <option value="Finalizado">Finalizado (Sistema Ativo e Gerando)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <h6 class="fw-bold text-secondary text-uppercase small tracking-wider mb-2">Relato Técnico / Diário de Bordo</h6>
+                            <div class="mb-3">
+                                <textarea class="form-control rounded-3 text-muted small" rows="4" id="txt-diario-input" name="NovoDiarioBordo" placeholder="Insira o andamento da fixação dos suportes, conexão dos microinversores ou pendências com a distribuidora de energia..."></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer border-top-0 bg-light py-3 px-4 rounded-bottom-4 d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-secondary fw-semibold px-4 py-2 rounded-3 text-dark bg-transparent border-0" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-dark fw-semibold px-4 py-2 rounded-3">Atualizar Ordem</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('modalGerenciarProjeto');
+        if (modal) {
+        modal.addEventListener('show.bs.modal', function (event) {
+        const botao = event.relatedTarget;
+
+        const idProjeto = botao.getAttribute('data-id');
+        document.getElementById('modalGerenciarProjetoLabel').textContent = `🛠️ Ordem de Serviço - Projeto #PRJ-${idProjeto.padStart(4, '0')}`;
+        document.getElementById('input-projeto-id').value = idProjeto;
+
+        document.getElementById('txt-tecnico').textContent = botao.getAttribute('data-tecnico');
+        document.getElementById('txt-area').textContent = `${botao.getAttribute('data-area')} m²`;
+        document.getElementById('txt-local').textContent = botao.getAttribute('data-cidade');
+        document.getElementById('txt-data').textContent = botao.getAttribute('data-data');
+
+        document.getElementById('faseSelect').value = botao.getAttribute('data-status');
+        document.getElementById('txt-diario-input').value = botao.getAttribute('data-diary') || botao.getAttribute('data-diario');
+        });
+        }
+        });
+    </script>
+    <script>
+        function abrirSidebar() {
+        document.getElementById('sidebar').classList.add('open');
+        document.getElementById('sidebarOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        }
+        function fecharSidebar() {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>

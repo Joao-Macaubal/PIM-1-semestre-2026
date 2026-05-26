@@ -1,0 +1,70 @@
+﻿@page "/"  
+@model asc.Pages.LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ESC</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-header">
+            <svg class="logo-icon" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="#6b8266" stroke-width="2" stroke-linecap="round">
+                    <line x1="60" y1="35" x2="60" y2="5" />
+                    <line x1="60" y1="35" x2="40" y2="12" />
+                    <line x1="60" y1="35" x2="80" y2="12" />
+                    <line x1="60" y1="35" x2="22" y2="25" />
+                    <line x1="60" y1="35" x2="98" y2="25" />
+                    <line x1="60" y1="35" x2="12" y2="45" />
+                    <line x1="60" y1="35" x2="108" y2="45" />
+                </g>
+                <line x1="5" y1="50" x2="40" y2="50" stroke="#6b8266" stroke-width="2" stroke-linecap="round" />
+                <line x1="80" y1="50" x2="115" y2="50" stroke="#6b8266" stroke-width="2" stroke-linecap="round" />
+                <circle cx="60" cy="50" r="14" fill="#ffffff" stroke="#6b8266" stroke-width="2" />
+                <circle cx="60" cy="50" r="11" fill="none" stroke="#6b8266" stroke-width="1" />
+                <text x="60" y="53" font-family="'Montserrat', sans-serif" font-size="8" font-weight="700" fill="#6b8266" text-anchor="middle">ESC</text>
+            </svg>
+            <h1>BEM-VINDO DE VOLTA!</h1>
+            <p>Faça login com suas credenciais.</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.MensagemErro))
+        {
+            <div style="background-color: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: 'Montserrat', sans-serif; text-align: center; margin-bottom: 15px;">
+                ⚠️ @Model.MensagemErro
+            </div>
+        }
+
+        <form class="login-form" method="post">
+            <div class="form-group">
+                <label for="usuario">CPF/CNPJ:</label>
+                <input type="text" id="usuario" asp-for="Documento" placeholder="CPF/CNPJ" required>
+            </div>
+
+            <div class="form-group">
+                <div class="label-row">
+                    <label for="senha">Senha:</label>
+                    <a href="/recuperar-senha" class="forgot-password">ESQUECEU A SENHA?</a>
+                </div>
+                <input type="password" id="senha" asp-for="Senha" placeholder="Digite sua senha" required>
+            </div>
+
+            <button type="submit" class="btn-submit">ENTRAR</button>
+        </form>
+
+        <hr class="divider">
+
+        <div class="login-footer">
+            <a href="/cadastro" class="register-link">NÃO TEM CONTA? CADASTRE-SE</a>
+            <p class="copyright">2026 - TODOS OS DIREITOS RESERVADOS</p>
+        </div>
+    </div>
+
+    </body>
+</html>

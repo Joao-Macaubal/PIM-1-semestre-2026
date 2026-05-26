@@ -1,0 +1,329 @@
+﻿@page
+@model asc.Pages.DashboardClienteModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Cliente - ESC Energia Solar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-admin.css">
+    
+</head>
+<body>
+
+    <a class="visually-hidden-focusable bg-dark text-white p-3 position-absolute z-3" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+    <div class="d-flex min-vh-100 position-relative">
+
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+        <aside class="sidebar d-flex flex-column justify-content-between p-3 text-white" id="sidebar" role="complementary" aria-label="Menu do Cliente">
+            <div>
+                <div class="sidebar-brand d-flex align-items-center gap-2 pb-4 pt-2">
+                    <svg class="logo-icon" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: auto;" aria-hidden="true">
+                        <g stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+                            <line x1="60" y1="35" x2="60" y2="5" />
+                            <line x1="60" y1="35" x2="40" y2="12" />
+                            <line x1="60" y1="35" x2="80" y2="12" />
+                            <line x1="60" y1="35" x2="22" y2="25" />
+                            <line x1="60" y1="35" x2="98" y2="25" />
+                            <line x1="60" y1="35" x2="12" y2="45" />
+                            <line x1="60" y1="35" x2="108" y2="45" />
+                        </g>
+                        <line x1="5" y1="50" x2="40" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <line x1="80" y1="50" x2="115" y2="50" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="14" fill="#2d4536" stroke="#ffffff" stroke-width="2" />
+                        <circle cx="60" cy="50" r="11" fill="none" stroke="#ffffff" stroke-width="1" />
+                    </svg>
+                    <span class="m-0 fw-bold text-uppercase" style="font-size: 14px; letter-spacing: 1px;">Portal ESC</span>
+                </div>
+
+                <nav class="sidebar-nav d-flex flex-column gap-2 mt-4" aria-label="Navegação principal do cliente">
+                    <a href="#view-dashboard" id="link-dashboard" class="nav-link active d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold" onclick="alternarAbas('dashboard')" aria-current="page">
+                        <span aria-hidden="true">📊</span> Meu Painel
+                    </a>
+                    <a href="#view-nova-solicitacao" id="link-solicitacao" class="nav-link d-flex align-items-center gap-3 rounded-3 text-decoration-none fw-semibold" onclick="alternarAbas('solicitacao')">
+                        <span aria-hidden="true">☀️</span> Nova Solicitação
+                    </a>
+                </nav>
+            </div>
+
+            <div class="pb-2">
+                <a href="/" class="btn btn-danger w-100 fw-bold py-2 rounded-3" aria-label="Sair da conta e voltar para a tela de login">🚪 Sair</a>
+            </div>
+        </aside>
+
+        <main id="conteudo-principal" class="admin-content d-flex flex-column flex-grow-1 vh-100 overflow-hidden">
+
+            <header class="admin-header bg-white px-5 py-3 d-flex justify-content-between align-items-center">
+                <button class="sidebar-toggle" onclick="abrirSidebar()" aria-label="Abrir menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="header-title">
+                    <h1 id="titulo-pagina" class="m-0 fs-5 fw-bold text-dark">Área do Cliente</h1>
+                    <p id="subtitulo-pagina" class="m-0 text-muted small mt-1">Olá, @Model.ClienteNome! Acompanhe seus pedidos e interaja com a equipe técnica</p>
+                </div>
+
+                <div class="header-right d-flex align-items-center gap-4">
+                    <div class="profile-avatar rounded-circle d-flex align-items-center justify-content-center fw-bold" aria-label="Iniciais do Cliente Conectado">
+                        @Model.ClienteNome.Substring(0, Math.Min(2, Model.ClienteNome.Length)).ToUpper()
+                    </div>
+                </div>
+            </header>
+
+            <div class="admin-page-body p-5 flex-grow-1 overflow-auto">
+
+                @if (!string.IsNullOrEmpty(Model.MensagemErro))
+                {
+                    <div class="alert alert-danger rounded-3" role="alert">⚠️ @Model.MensagemErro</div>
+                }
+                @if (TempData["MensagemSucesso"] != null)
+                {
+                    <div class="alert alert-success rounded-3" role="alert">✅ @TempData["MensagemSucesso"]</div>
+                }
+
+                <div id="secao-dashboard">
+                    <section class="card border-light shadow-sm p-4 rounded-4 mb-4 bg-white" aria-labelledby="status-titulo">
+                        <h2 id="status-titulo" class="fs-6 fw-bold text-uppercase text-secondary tracking-wider mb-4">Status da Minha Solicitação Atual</h2>
+
+                        @{
+                            // Regra de renderização baseada no banco original
+                            bool temImovel = Model.ImovelAtual != null;
+                            bool temProjeto = Model.ProjetoAtual != null;
+                            string statusStr = temProjeto ? Model.ProjetoAtual!.StatusExecucao : (temImovel ? "Em Análise" : "Nenhuma");
+
+                            // CSS de realce das etapas
+                            string step1 = temImovel ? "bg-success-subtle text-success" : "bg-light text-muted";
+                            string step2 = (temImovel && !temProjeto) ? "bg-info-subtle text-info border border-info animate-pulse" : (temImovel ? "bg-success-subtle text-success" : "bg-light text-muted");
+                            string step3 = (temProjeto && statusStr == "Aguardando Materiais") ? "bg-warning-subtle text-warning border border-warning animate-pulse" : (temProjeto && statusStr != "Aguardando Materiais" ? "bg-success-subtle text-success" : "bg-light text-muted");
+                            string step4 = (temProjeto && statusStr == "Em Instalação") ? "bg-primary-subtle text-primary border border-primary animate-pulse" : (temProjeto && statusStr == "Finalizado" ? "bg-success-subtle text-success" : "bg-light text-muted");
+                        }
+
+                        <div class="row text-center g-2 position-relative" aria-live="polite">
+                            <div class="col-md-3">
+                                <div class="p-3 @step1 rounded-3 fw-bold">1. Novo Pedido</div>
+                                <span class="small text-dark d-block mt-1 fw-semibold">@(temImovel ? "Registrado com sucesso" : "Aguardando solicitação")</span>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 @step2 rounded-3 fw-bold">2. Em Análise</div>
+                                <span class="small text-dark d-block mt-1 fw-semibold">@(temImovel ? "Triagem de viabilidade" : "Sem análise ativa")</span>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 @step3 rounded-3 fw-bold">3. Proposta Gerada</div>
+                                <span class="small text-dark d-block mt-1 fw-semibold">@(temProjeto ? "Termos técnicos definidos" : "Aguardando engenharia")</span>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 @step4 rounded-3 fw-bold">4. Projeto / Obra</div>
+                                <span class="small text-dark d-block mt-1 fw-semibold">@(temProjeto ? $"Fase: {statusStr}" : "Aguardando liberação")</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    @if (temImovel && !temProjeto)
+                    {
+                        <section class="card border-light shadow-sm p-4 rounded-4 mb-4 bg-white border-start border-4 border-info">
+                            <h2 class="fs-5 fw-bold text-dark m-0">🔍 Imóvel Técnico Cadastrado em Análise</h2>
+                            <p class="text-muted small m-0 mt-1">Endereço monitorado: <strong>@Model.ImovelAtual!.Endereco, @Model.ImovelAtual!.Cidade</strong></p>
+                            <span class="small text-muted d-block mt-2">Nossa equipe técnica está calculando o dimensionamento para a área útil de @Model.ImovelAtual.AreaDisponivel m².</span>
+                        </section>
+                    }
+                    else if (temProjeto)
+                    {
+                        <section class="card border-light shadow-sm p-4 rounded-4 mb-4 bg-white border-start border-4 border-warning" aria-labelledby="proposta-titulo">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                                <div>
+                                    <h2 id="proposta-titulo" class="fs-5 fw-bold text-dark m-0">📄 Sua Proposta Comercial está em Andamento!</h2>
+                                    <p class="text-muted small m-0 mt-1">Responsável Técnico do Sistema Fotovoltaico: <strong>@Model.ProjetoAtual!.ResponsavelTecnico</strong></p>
+                                    <span class="small text-secondary d-block mt-1">Notas do Diário de Bordo: <em>@(Model.ProjetoAtual.DiarioBordo ?? "Nenhuma nota técnica adicionada até o momento.")</em></span>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-success btn-sm px-4 py-2 fw-bold rounded-2 text-white"
+                                            type="button"
+                                            data-bs-toggle="offcanvas"
+                                            data-bs-target="#gavetaDetalhesProjeto"
+                                            aria-controls="gavetaDetalhesProjeto">
+                                        Acompanhar Projeto
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+                    }
+                </div>
+
+                <div id="secao-solicitacao" style="display: none;">
+                    <form id="form-orcamento" class="card border-light shadow-sm p-4 rounded-4 bg-white" aria-labelledby="form-titulo" method="post" asp-page-handler="EnviarSolicitacao">
+                        <h2 id="form-titulo" class="fs-6 fw-bold text-uppercase text-secondary tracking-wider mb-4">Dados Técnicos Obrigatórios do Imóvel</h2>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="tipo_imovel" class="form-label fw-semibold text-secondary small">Tipo do Imóvel:</label>
+                                <select id="tipo_imovel" asp-for="TipoImovel" class="form-select rounded-3" required>
+                                    <option value="" disabled selected>Selecione uma opção</option>
+                                    <option value="Residencial">Residencial</option>
+                                    <option value="Comercial">Comercial</option>
+                                    <option value="Industrial">Industrial</option>
+                                    <option value="Rural">Rural</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="area_disponivel" class="form-label fw-semibold text-secondary small">Área útil disponível para painéis (m²):</label>
+                                <input type="number" id="area_disponivel" asp-for="AreaDisponivel" class="form-control rounded-3" placeholder="Ex: 50" min="1" step="0.01" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="cidade_imovel" class="form-label fw-semibold text-secondary small">Cidade:</label>
+                                <input type="text" id="cidade_imovel" asp-for="Cidade" class="form-control rounded-3" placeholder="Ex: São José do Rio Preto" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="endereco_imovel" class="form-label fw-semibold text-secondary small">Endereço Completo:</label>
+                                <input type="text" id="endereco_imovel" asp-for="Endereco" class="form-control rounded-3" placeholder="Rua, número e bairro" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="consumo_medio" class="form-label fw-semibold text-secondary small">Valor Médio Mensal da Conta de Luz (R$):</label>
+                                <input type="number" id="consumo_medio" asp-for="ConsumoMedioMensal" class="form-control rounded-3" placeholder="Ex: 350" min="1" step="0.01" required>
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="check_veracidade" required>
+                                    <label class="form-check-label text-muted small fw-semibold" for="check_veracidade">
+                                        Confirmo a veracidade das informações estruturais e de consumo enviadas para análise comercial.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-end gap-2 mt-4">
+                                <button type="button" class="btn btn-light fw-semibold px-4 rounded-3 text-secondary border-0 bg-transparent" onclick="alternarAbas('dashboard')">Cancelar</button>
+                                <button type="submit" class="btn btn-dark fw-bold px-5 rounded-3">Enviar Solicitação</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="offcanvas offcanvas-end border-0 shadow-lg rounded-start-4" tabindex="-1" id="gavetaDetalhesProjeto" aria-labelledby="gavetaDetalhesProjetoLabel" style="width: 500px; background-color: #f8fafc;">
+
+        <div class="offcanvas-header bg-white border-bottom py-3 px-4 rounded-top-start-4">
+            <div class="d-flex align-items-center gap-2">
+                <span class="fs-4">🛠️</span>
+                <div>
+                    <h5 class="offcanvas-title fw-bold text-dark fs-6 m-0" id="gavetaDetalhesProjetoLabel">Acompanhamento Técnico</h5>
+                    <small class="text-muted small">Ordem de Serviço #PRJ-@(Model.ProjetoAtual?.Id.ToString("D4") ?? "0000")</small>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body p-4 d-flex flex-column gap-4">
+
+            @if (Model.ProjetoAtual != null)
+            {
+                <div class="card border-0 shadow-sm p-3 rounded-3 bg-white">
+                    <h6 class="fw-bold text-secondary text-uppercase mb-3" style="font-size: 11px; letter-spacing: 0.5px;">Estrutura do Sistema</h6>
+
+                    <div class="d-flex flex-column gap-2" style="font-size: 13px;">
+                        <div class="d-flex justify-content-between border-bottom pb-2">
+                            <span class="text-muted">Responsável:</span>
+                            <strong class="text-dark">@Model.ProjetoAtual.ResponsavelTecnico</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2">
+                            <span class="text-muted">Área Dimensional:</span>
+                            <strong class="text-dark">@Model.ProjetoAtual.Imovel?.AreaDisponivel m²</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom pb-2">
+                            <span class="text-muted">Tipo de Imóvel:</span>
+                            <strong class="text-dark text-capitalize">@Model.ProjetoAtual.Imovel?.TipoImovel</strong>
+                        </div>
+                        <div class="d-flex justify-content-between pt-1">
+                            <span class="text-muted">Localização:</span>
+                            <strong class="text-dark text-end" style="max-width: 250px;">@Model.ProjetoAtual.Imovel?.Endereco, @Model.ProjetoAtual.Imovel?.Cidade</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm p-3 rounded-3 bg-white flex-grow-1 d-flex flex-column">
+                    <h6 class="fw-bold text-secondary text-uppercase mb-2" style="font-size: 11px; letter-spacing: 0.5px;">📓 Diário de Bordo (Notas do Instalador)</h6>
+
+                    <div class="p-3 border rounded-3 bg-light text-dark flex-grow-1 overflow-auto small mb-2" style="line-height: 1.6; white-space: pre-line; max-height: 320px;">
+                        @if (!string.IsNullOrEmpty(Model.ProjetoAtual.DiarioBordo))
+                        {
+                            @Model.ProjetoAtual.DiarioBordo
+                        }
+                        else
+                        {
+                            <span class="text-muted italic">Nenhuma anotação técnica foi inserida de campo pela engenharia ainda.</span>
+                        }
+                    </div>
+                    <span class="text-muted text-end" style="font-size: 11px;">Última atualização: @Model.ProjetoAtual.AtualizadoEm.ToString("dd/MM/yyyy à\\s HH:mm")</span>
+                </div>
+
+                <div class="d-grid mt-2">
+                    <button type="button" class="btn btn-dark fw-bold py-2 rounded-3" data-bs-dismiss="offcanvas">Fechar Visualização</button>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning rounded-3 small">⚠️ Dados técnicos não localizados. Certifique-se de que a proposta está ativa.</div>
+            }
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function alternarAbas(aba) {
+        const secDashboard = document.getElementById('secao-dashboard');
+        const secSolicitacao = document.getElementById('secao-solicitacao');
+        const linkDash = document.getElementById('link-dashboard');
+        const linkSol = document.getElementById('link-solicitacao');
+        const titulo = document.getElementById('titulo-pagina');
+        const subtitulo = document.getElementById('subtitulo-pagina');
+
+        if(aba === 'dashboard') {
+        secDashboard.style.display = 'block';
+        secSolicitacao.style.display = 'none';
+        linkDash.classList.add('active');
+        linkDash.setAttribute('aria-current', 'page');
+        linkSol.classList.remove('active');
+        linkSol.removeAttribute('aria-current');
+        titulo.textContent = "Área do Cliente";
+        subtitulo.textContent = "Acompanhe seus pedidos e interaja com a equipe técnica";
+        } else {
+        secDashboard.style.display = 'none';
+        secSolicitacao.style.display = 'block';
+        linkSol.classList.add('active');
+        linkSol.setAttribute('aria-current', 'page');
+        linkDash.classList.remove('active');
+        linkDash.removeAttribute('aria-current');
+        titulo.textContent = "Nova Solicitação de Orçamento";
+        subtitulo.textContent = "Insira as características do seu imóvel para dimensionamento do sistema fotovoltaico";
+        }
+        }
+
+        function processarAcao(acao) {
+        if(acao === 'aprovar') {
+        alert('Redirecionando para detalhes técnicos de acompanhamento da obra física.');
+        }
+        }
+    </script>
+    <script>
+        function abrirSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function fecharSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>

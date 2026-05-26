@@ -1,0 +1,245 @@
+﻿@page
+@model asc.Pages.CadastroModel
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - ESC</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="alerta-erro" class="alert-box">
+        <span class="alert-icon">⚠️</span>
+        <span id="alerta-mensagem">Atenção: Há campos obrigatórios em branco!</span>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.MensagemErro))
+    {
+        <div style="background-color: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; padding: 12px; border-radius: 8px; max-width: 400px; margin: 20px auto -10px auto; font-size: 13px; font-weight: 600; font-family: 'Montserrat', sans-serif; text-align: center;">
+            ⚠️ @Model.MensagemErro
+        </div>
+    }
+
+    <div class="login-container cadastro-container">
+        <div class="login-header">
+            <svg class="logo-icon" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="#6b8266" stroke-width="2" stroke-linecap="round">
+                    <line x1="60" y1="35" x2="60" y2="5" />
+                    <line x1="60" y1="35" x2="40" y2="12" />
+                    <line x1="60" y1="35" x2="80" y2="12" />
+                    <line x1="60" y1="35" x2="22" y2="25" />
+                    <line x1="60" y1="35" x2="98" y2="25" />
+                    <line x1="60" y1="35" x2="12" y2="45" />
+                    <line x1="60" y1="35" x2="108" y2="45" />
+                </g>
+                <line x1="5" y1="50" x2="40" y2="50" stroke="#6b8266" stroke-width="2" />
+                <line x1="80" y1="50" x2="115" y2="50" stroke="#6b8266" stroke-width="2" />
+                <circle cx="60" cy="50" r="14" fill="#ffffff" stroke="#6b8266" stroke-width="2" />
+                <circle cx="60" cy="50" r="11" fill="none" stroke="#6b8266" stroke-width="1" />
+                <text x="60" y="53" font-family="'Montserrat', sans-serif" font-size="8" font-weight="700" fill="#6b8266" text-anchor="middle">ESC</text>
+            </svg>
+            <h1 class="titulo-cadastro">CADASTRE-SE AQUI</h1>
+        </div>
+
+        <form id="form-cadastro" class="login-form" method="post">
+
+            <div id="etapa-1">
+                <div class="form-group">
+                    <label>Nome Completo:</label>
+                    <input type="text" asp-for="Nome" id="input-nome" value="@Model.Nome">
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone:</label>
+                    <div class="row-flex text-inputs">
+                        <input type="text" id="ddd" maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="flex: 1; text-align: center;" placeholder="00">
+                        <input type="text" id="telefone" maxlength="10" oninput="mascaraTelefone(this)" style="flex: 4;" placeholder="90000-0000">
+                    </div>
+                    <input type="hidden" asp-for="Telefone" id="telefone-final">
+                </div>
+
+                <div class="form-group">
+                    <label>CPF ou CNPJ:</label>
+                    <input type="text" asp-for="Documento" id="input-documento" maxlength="18" oninput="mascaraMutavel(this)" placeholder="Digite seu CPF ou CNPJ" value="@Model.Documento">
+                </div>
+
+                <div class="pessoa-toggle-container">
+                    <label class="pessoa-box">
+                        <input type="radio" name="tipo_pessoa" value="fisica" checked>
+                        <span class="custom-radio"></span>
+                        Pessoa Física
+                    </label>
+                    <label class="pessoa-box">
+                        <input type="radio" name="tipo_pessoa" value="juridica">
+                        <span class="custom-radio"></span>
+                        Pessoa Jurídica
+                    </label>
+                </div>
+
+                <div class="row-flex layout-endereco">
+                    <div class="form-group flex-3">
+                        <label>Endereço:</label>
+                        <input type="text" id="input-endereco">
+                    </div>
+                    <div class="form-group flex-1">
+                        <label>Estado:</label>
+                        <select id="input-estado" class="custom-select">
+                            <option value="">Select</option>
+                            <option value="SP">SP</option>
+                            <option value="RJ">RJ</option>
+                            <option value="MG">MG</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-submit" onclick="proximaEtapa()">PRÓXIMO</button>
+            </div>
+
+            <div id="etapa-2" style="display: none;">
+                <div class="form-group">
+                    <label>Crie uma Senha:</label>
+                    <input type="password" asp-for="Senha" id="input-senha" minlength="8">
+                </div>
+
+                <div class="form-group">
+                    <label>Confirme a Senha:</label>
+                    <input type="password" id="input-confirmar-senha" minlength="8">
+                </div>
+
+                <button type="submit" class="btn-submit">FINALIZAR CADASTRO</button>
+                <button type="button" class="btn-voltar" onclick="voltarEtapa()">Voltar</button>
+            </div>
+
+        </form>
+
+        <div class="login-footer">
+            <a href="/Login" class="register-link">JÁ TEM CONTA? FAÇA LOGIN</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('form-cadastro');
+        const alerta = document.getElementById('alerta-erro');
+        const alertaMensagem = document.getElementById('alerta-mensagem');
+
+        function mascaraTelefone(el) {
+            let v = el.value.replace(/\D/g, "");
+            if (v.length > 5) {
+                if (v.length === 9) {
+                    v = v.replace(/^(\d{5})(\d)/, "$1-$2");
+                } else {
+                    v = v.replace(/^(\d{4})(\d)/, "$1-$2");
+                }
+            }
+            el.value = v;
+        }
+
+        function mascaraMutavel(el) {
+            let v = el.value.replace(/\D/g, "");
+            if (v.length <= 11) {
+                v = v.replace(/(\d{3})(\d)/, "$1.$2");
+                v = v.replace(/(\d{3})(\d)/, "$1.$2");
+                v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            } else {
+                v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+                v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+                v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+                v = v.replace(/(\d{4})(\d)/, "$1-$2");
+            }
+            el.value = v;
+        }
+
+        function removerFormatacao(valor) {
+            return valor.replace(/\D/g, "");
+        }
+
+        function validarEtapa1() {
+            const nome = document.getElementById('input-nome');
+            const ddd = document.getElementById('ddd');
+            const telefone = document.getElementById('telefone');
+            const documento = document.getElementById('input-documento');
+            const endereco = document.getElementById('input-endereco');
+            const estado = document.getElementById('input-estado');
+
+            const telLimpo = removerFormatacao(telefone.value);
+            const docLimpo = removerFormatacao(documento.value);
+
+            if (!nome || !nome.value.trim()) {
+                dispararAlerta('Ops! Esqueceu de preencher o Nome Completo.', nome);
+                return false;
+            }
+            if (!ddd || ddd.value.length !== 2) {
+                dispararAlerta('O DDD precisa ter exatamente 2 dígitos.', ddd);
+                return false;
+            }
+            if (!telLimpo || (telLimpo.length !== 9 && telLimpo.length !== 8)) {
+                dispararAlerta('O número de telefone precisa ter 8 ou 9 dígitos.', telefone);
+                return false;
+            }
+            if (!docLimpo || (docLimpo.length !== 11 && docLimpo.length !== 14)) {
+                dispararAlerta('Documento incompleto. Verifique o CPF ou CNPJ.', documento);
+                return false;
+            }
+            if (!endereco || !endereco.value.trim()) {
+                dispararAlerta('Precisamos do seu Endereço para continuar.', endereco);
+                return false;
+            }
+            if (!estado || !estado.value) {
+                dispararAlerta('Selecione o Estado na lista.', estado);
+                return false;
+            }
+
+            const campoOcultoTelefone = document.getElementById('telefone-final');
+            if (campoOcultoTelefone) {
+                campoOcultoTelefone.value = ddd.value + telLimpo;
+            }
+            return true;
+        }
+
+        function proximaEtapa() {
+            if (validarEtapa1()) {
+                document.getElementById('etapa-1').style.display = 'none';
+                document.getElementById('etapa-2').style.display = 'block';
+            }
+        }
+
+        function voltarEtapa() {
+            document.getElementById('etapa-2').style.display = 'none';
+            document.getElementById('etapa-1').style.display = 'block';
+        }
+
+        form.addEventListener('submit', function (event) {
+            if (!validarEtapa1()) {
+                event.preventDefault();
+                voltarEtapa();
+                return;
+            }
+
+            const senha = document.getElementById('input-senha');
+            const confirmarSenha = document.getElementById('input-confirmar-senha');
+
+            if (!senha || senha.value.length < 8) {
+                event.preventDefault();
+                dispararAlerta('A senha precisa ter no mínimo 8 caracteres.', senha);
+                return;
+            }
+
+            if (senha.value !== confirmarSenha.value) {
+                event.preventDefault();
+                dispararAlerta('As senhas digitadas não conferem.', confirmarSenha);
+                return;
+            }
+        });
+
+        function dispararAlerta(mensagem, elementoFoco) {
+            alertaMensagem.textContent = mensagem;
+            alerta.classList.add('mostrar');
+            if (elementoFoco) elementoFoco.focus();
+            setTimeout(() => { alerta.classList.remove('mostrar'); }, 4000);
+        }
+    </script>
+</body>
+</html>
