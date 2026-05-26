@@ -1,0 +1,326 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\lynxk\\source\\repos\\asc\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\projetos-admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\projetos-admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\cadastro.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\cadastro.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\cadastro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\cadastro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\models\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\models\\projeto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\clientes-admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\clientes-admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\dashboard-admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\dashboard-admin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\dashboard-cliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\dashboard-cliente.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\recuperar-senha.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\recuperar-senha.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\wwwroot\\css\\style-admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\wwwroot\\css\\style-admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\projetos-admin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\projetos-admin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\dashboard-admin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\dashboard-admin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\dashboard-cliente.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\dashboard-cliente.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\models\\imovel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\models\\imovel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\clientes-admin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\clientes-admin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|c:\\users\\lynxk\\source\\repos\\asc\\asc\\pages\\recuperar-senha.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6FE2B729-40F3-4D09-74DF-B74E994B78FF}|asc\\asc.csproj|solutionrelative:asc\\pages\\recuperar-senha.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "cadastro.cshtml",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\cadastro.cshtml",
+              "RelativeDocumentMoniker": "asc\\Pages\\cadastro.cshtml",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\cadastro.cshtml",
+              "RelativeToolTip": "asc\\Pages\\cadastro.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T14:29:50.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "projetos-admin.cshtml",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\projetos-admin.cshtml",
+              "RelativeDocumentMoniker": "asc\\Pages\\projetos-admin.cshtml",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\projetos-admin.cshtml",
+              "RelativeToolTip": "asc\\Pages\\projetos-admin.cshtml",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAUwLoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T16:00:42.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "recuperar-senha.cshtml",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\recuperar-senha.cshtml",
+              "RelativeDocumentMoniker": "asc\\Pages\\recuperar-senha.cshtml",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\recuperar-senha.cshtml",
+              "RelativeToolTip": "asc\\Pages\\recuperar-senha.cshtml",
+              "ViewState": "AgIAAEkAAAAAAAAAAADwv3sAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T13:46:28.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "dashboard-cliente.cshtml",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-cliente.cshtml",
+              "RelativeDocumentMoniker": "asc\\Pages\\dashboard-cliente.cshtml",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-cliente.cshtml",
+              "RelativeToolTip": "asc\\Pages\\dashboard-cliente.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAEwBgAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T15:04:55.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "dashboard-admin.cshtml",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-admin.cshtml",
+              "RelativeDocumentMoniker": "asc\\Pages\\dashboard-admin.cshtml",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-admin.cshtml",
+              "RelativeToolTip": "asc\\Pages\\dashboard-admin.cshtml",
+              "ViewState": "AgIAACUAAAAAAAAAAAAEwDUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T15:47:00.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "clientes-admin.cshtml",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\clientes-admin.cshtml",
+              "RelativeDocumentMoniker": "asc\\Pages\\clientes-admin.cshtml",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\clientes-admin.cshtml",
+              "RelativeToolTip": "asc\\Pages\\clientes-admin.cshtml",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAEwLQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T14:09:48.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\wwwroot\\css\\style.css",
+              "RelativeDocumentMoniker": "asc\\wwwroot\\css\\style.css",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\wwwroot\\css\\style.css",
+              "RelativeToolTip": "asc\\wwwroot\\css\\style.css",
+              "ViewState": "AgIAADMBAAAAAAAAAAAuwHEBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-05-24T16:54:05.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Projeto.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Models\\Projeto.cs",
+              "RelativeDocumentMoniker": "asc\\Models\\Projeto.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Models\\Projeto.cs",
+              "RelativeToolTip": "asc\\Models\\Projeto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T14:49:09.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "cadastro.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\cadastro.cshtml.cs",
+              "RelativeDocumentMoniker": "asc\\Pages\\cadastro.cshtml.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\cadastro.cshtml.cs",
+              "RelativeToolTip": "asc\\Pages\\cadastro.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T14:31:53.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "asc\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Models\\Cliente.cs",
+              "RelativeToolTip": "asc\\Models\\Cliente.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T14:31:03.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "style-admin.css",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\wwwroot\\css\\style-admin.css",
+              "RelativeDocumentMoniker": "asc\\wwwroot\\css\\style-admin.css",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\wwwroot\\css\\style-admin.css",
+              "RelativeToolTip": "asc\\wwwroot\\css\\style-admin.css",
+              "ViewState": "AgIAALIAAAAAAAAAAAAAALIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-05-24T16:54:12.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "dashboard-cliente.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-cliente.cshtml.cs",
+              "RelativeDocumentMoniker": "asc\\Pages\\dashboard-cliente.cshtml.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-cliente.cshtml.cs",
+              "RelativeToolTip": "asc\\Pages\\dashboard-cliente.cshtml.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAQwFgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T15:30:48.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "dashboard-admin.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-admin.cshtml.cs",
+              "RelativeDocumentMoniker": "asc\\Pages\\dashboard-admin.cshtml.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\dashboard-admin.cshtml.cs",
+              "RelativeToolTip": "asc\\Pages\\dashboard-admin.cshtml.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAIwHQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T15:46:45.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "projetos-admin.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\projetos-admin.cshtml.cs",
+              "RelativeDocumentMoniker": "asc\\Pages\\projetos-admin.cshtml.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\projetos-admin.cshtml.cs",
+              "RelativeToolTip": "asc\\Pages\\projetos-admin.cshtml.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAnwDEAAABhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T16:00:33.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "asc\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "asc\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wAwAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T14:24:22.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "clientes-admin.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\clientes-admin.cshtml.cs",
+              "RelativeDocumentMoniker": "asc\\Pages\\clientes-admin.cshtml.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\clientes-admin.cshtml.cs",
+              "RelativeToolTip": "asc\\Pages\\clientes-admin.cshtml.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAowDYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T14:12:47.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Imovel.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Models\\Imovel.cs",
+              "RelativeDocumentMoniker": "asc\\Models\\Imovel.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Models\\Imovel.cs",
+              "RelativeToolTip": "asc\\Models\\Imovel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T14:48:16.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "recuperar-senha.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\recuperar-senha.cshtml.cs",
+              "RelativeDocumentMoniker": "asc\\Pages\\recuperar-senha.cshtml.cs",
+              "ToolTip": "C:\\Users\\lynxk\\source\\repos\\asc\\asc\\Pages\\recuperar-senha.cshtml.cs",
+              "RelativeToolTip": "asc\\Pages\\recuperar-senha.cshtml.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAmwHYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T13:46:02.031Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
