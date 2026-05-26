@@ -1,0 +1,370 @@
+﻿body {
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #2d4536; /* Verde escuro do fundo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Card Principal */
+.login-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    padding: 40px 50px;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Logo e Cabeçalho */
+.login-header {
+    margin-bottom: 25px;
+}
+
+.logo-icon {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.login-header h1 {
+    color: #2d4536;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.login-header p {
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Abas Alternadoras (Tabs) */
+
+
+/* Container das Abas */
+.tab-container {
+    display: flex;
+    position: relative; /* Necessário para posicionar o slider */
+    background-color: #6b8266; /* Verde médio (fundo padrão) */
+    margin-bottom: 35px;
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 2px; /* Pequeno espaçamento interno para o efeito */
+}
+
+/* O Slider que faz a animação de deslizar */
+.tab-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(50% - 2px); /* Ocupa exatamente metade do container */
+    height: calc(100% - 4px);
+    background-color: #eaddca; /* Bege claro ativo */
+    border-radius: 4px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animação suave */
+    z-index: 1;
+}
+
+/* Botões por cima do Slider */
+.tab-btn {
+    flex: 1;
+    border: none;
+    background: none; /* Remove o fundo fixo */
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    z-index: 2; /* Garante que o texto fica acima do slider bege */
+    transition: color 0.3s ease;
+}
+
+/* Cor do texto baseada no estado */
+.tab-btn.active {
+    color: #2d4536; /* Verde escuro quando selecionado */
+}
+
+.tab-btn:not(.active) {
+    color: #ffffff; /* Branco quando inativo */
+}
+
+/* Formulário e Inputs */
+.login-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.forgot-password {
+    font-size: 10px;
+    font-weight: 700;
+    color: #000000;
+    text-decoration: underline;
+    margin-bottom: 8px;
+}
+
+/* Estilo idêntico das bordas pretas grossas da imagem */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2.5px solid #000000;
+    border-radius: 6px;
+    outline: none;
+}
+
+.login-form input:focus {
+    background-color: #f9f9f9;
+}
+
+/* Botão Entrar */
+.btn-submit {
+    width: 100%;
+    background-color: #6b8266;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s;
+}
+
+    .btn-submit:hover {
+        background-color: #556951;
+    }
+
+/* Divisor e Rodapé */
+.divider {
+    border: none;
+    height: 2px;
+    background-color: #8c8c8c;
+    margin: 30px 0 20px 0;
+}
+
+.login-footer .register-link {
+    font-size: 11px;
+    font-weight: 600;
+    color: #4a4a4a;
+    text-decoration: underline;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.login-footer .copyright {
+    font-size: 10px;
+    color: #8c8c8c;
+    font-weight: 600;
+}
+
+/* Ajuste para o card de cadastro ser um pouco mais alto/largo se necessário */
+.cadastro-container {
+    max-width: 550px;
+}
+
+.titulo-cadastro {
+    font-size: 22px !important;
+    margin-top: 10px;
+}
+
+/* Layout lado a lado para Endereço e Estado */
+.row-flex {
+    display: flex;
+    gap: 15px;
+}
+
+.flex-3 {
+    flex: 3;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* Custom Select (Borda grossa igual aos inputs) */
+.custom-select {
+    width: 100%;
+    padding: 12px;
+    border: 2.5px solid #000000;
+    border-radius: 6px;
+    background-color: white;
+    font-weight: 600;
+    appearance: none; /* Remove seta padrão */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+}
+
+/* Grupo de Radio Buttons */
+.radio-group {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+    .radio-container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2.5px solid #000;
+    border-radius: 50%;
+}
+
+.radio-container input:checked ~ .checkmark {
+    background-color: #000; /* Fica preto quando selecionado igual ao modelo */
+}
+
+/* Botão Voltar */
+.btn-voltar {
+    background: none;
+    border: none;
+    color: #4a4a4a;
+    text-decoration: underline;
+    font-weight: 600;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Estilo da Caixinha de Alerta */
+
+.alert-box {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffdddd;
+    color: #d9381e;
+    border: 2.5px solid #d9381e;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 99999 !important; /* Garante que fica por cima de qualquer div */
+    transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: auto;
+    max-width: 90%;
+}
+
+    .alert-box.mostrar {
+        top: 30px; /* Desce no topo da página */
+    }
+
+/* Estrutura das Caixas de Pessoa Física/Jurídica do Modelo */
+.pessoa-toggle-container {
+    display: flex;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.pessoa-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border: 2.5px solid #000000;
+    border-radius: 6px;
+    padding: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    background-color: #ffffff;
+    user-select: none;
+}
+
+    /* Esconde o rádio padrão */
+    .pessoa-box input[type="radio"] {
+        display: none;
+    }
+
+/* Desenho do Círculo do Radio Customizado */
+.custom-radio {
+    width: 20px;
+    height: 20px;
+    border: 2.5px solid #000000;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    background-color: #ffffff;
+}
+
+/* Quando estiver checado, coloca a bolinha preta central preenchida */
+.pessoa-box input[type="radio"]:checked + .custom-radio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #000000;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Ajustes gerais de layout */
+.row-flex {
+    display: flex;
+    gap: 12px;
+}
+
+.layout-endereco {
+    margin-bottom: 20px;
+}
